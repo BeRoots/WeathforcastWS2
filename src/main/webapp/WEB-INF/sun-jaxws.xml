@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+  <endpoint name="WeatherforcastWS2"
+	implementation="com.sebastien_deschamps.WeatherforcastWS2.WeatherImpl"
+	url-pattern="/ws/weatherforcast"></endpoint>
+</endpoints>
