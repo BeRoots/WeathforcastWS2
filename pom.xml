@@ -1,11 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<!-- https://maven.apache.org/ref/3.6.3/maven-model/maven.html -->
-
 	<groupId>com.sebastien_deschamps.WeatherforcastWS2</groupId>
 	<artifactId>WeatherforcastWS2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -13,14 +10,12 @@
 	<name>WeatherforcastWS2</name>
 	<description>WeatherforcastWS SOAP Webservice on embeded Glassfish Server</description>
 	<url>http://localhost</url>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.compiler.source>15</maven.compiler.source>
+		<maven.compiler.target>15</maven.compiler.target>
 		<junit.jupiter.version>5.7.0</junit.jupiter.version>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.sun.xml.ws</groupId>
@@ -50,19 +45,17 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
-
 		<outputDirectory>target/classes</outputDirectory>
 		<testOutputDirectory>target/test-classes</testOutputDirectory>
 		<directory>target</directory>
 		<finalName>${project.artifactId}-${project.version}</finalName>
-
-		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
-				defaults (may be moved to parent pom) -->
+		<pluginManagement>
+			<!-- lock down plugins versions to avoid using Maven defaults (may be 
+				moved to parent pom) -->
 			<plugins>
 				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
 				<plugin>
@@ -105,7 +98,6 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -113,22 +105,25 @@
 				<version>3.0.0</version>
 				<configuration>
 					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+					<!-- <archive> <addDefaultImplementationEntries>true</addDefaultImplementationEntries> 
+						<addBuildEnvironmentEntries>true</addBuildEnvironmentEntries> <mainClass>com.sebastien_deschamps.${project.artifactId}.WeatherImpl</mainClass> 
+						<packageName>com.sebastien_deschamps.${project.artifactId}</packageName> 
+						</archive> -->
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.glassfish.embedded</groupId>
 				<artifactId>maven-embedded-glassfish-plugin</artifactId>
-				<!-- <version>3.0-74b</version> -->
 				<version>5.1</version>
 				<configuration>
 					<goalPrefix>embedded-glassfish</goalPrefix>
-					<app>target/${project.artifactId}-${project.version}.war</app>
-					<name>WeatherforcastWS2</name>
+					<app>target/${project.build.finalName}/${project.build.finalName}.war</app>
+					<name>${project.artifactId}</name>
 					<ports>
 						<http-listener>8080</http-listener>
 						<https-listener>8181</https-listener>
 					</ports>
-					<contextRoot>test</contextRoot>
+					<contextRoot>${project.artifactId}</contextRoot>
 					<autoDelete>true</autoDelete>
 				</configuration>
 				<executions>
